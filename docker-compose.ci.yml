@@ -1,0 +1,8 @@
+version: "3.9"
+
+services:
+  backend:
+    image: "fastapi-assesment-backend:latest"
+
+  frontend:
+    image: "fastapi-assesment-frontend:latest"
