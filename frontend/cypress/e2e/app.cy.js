@@ -12,7 +12,7 @@ describe("Test register, login and item", () => {
   });
 
   it("Displays login page", () => {
-    cy.contains("Sign in");
+    cy.contains("Log In");
     cy.contains("Register");
   });
 

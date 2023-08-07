@@ -1,12 +1,13 @@
 from typing import Any
 
 from fastapi import APIRouter, Depends
-from app.schemas.dashboard import Dashboard as DashboardSchema
+from sqlalchemy import extract, func, select
 from sqlalchemy.ext.asyncio.session import AsyncSession
+
 from app.deps.db import get_async_session
-from app.models.user import User
-from sqlalchemy import func, select, extract
 from app.models.todo import Todo
+from app.models.user import User
+from app.schemas.dashboard import Dashboard as DashboardSchema
 
 router = APIRouter(prefix="/home")
 
@@ -16,12 +17,17 @@ async def get_home_stats(
     session: AsyncSession = Depends(get_async_session),
 ) -> Any:
     total_todos = await session.scalar(select(func.count(Todo.id)))
-    completed_todos = await session.scalar(select(func.count(Todo.id)).where(Todo.marked == True))
-    incompleted_todos = await session.scalar(select(func.count(Todo.id)).where(Todo.marked == False))
+    completed_todos = await session.scalar(
+        select(func.count(Todo.id)).where(Todo.marked)
+    )
+    incompleted_todos = await session.scalar(
+        select(func.count(Todo.id)).where(~Todo.marked)
+    )
 
     average_duration_seconds = await session.scalar(
-        select(func.avg(extract('epoch', Todo.completedAt - Todo.created)))
-        .where(Todo.completedAt.isnot(None))
+        select(func.avg(extract("epoch", Todo.completedAt - Todo.created))).where(
+            Todo.completedAt.isnot(None)
+        )
     )
     average_duration = int(average_duration_seconds)
     days, seconds = divmod(average_duration, 86400)
@@ -41,10 +47,10 @@ async def get_home_stats(
         select(func.avg(select(func.count(User.id))))
     )
     average_completed_todos_per_user = await session.scalar(
-        select(func.avg(select(func.count(Todo.id)).where(Todo.marked == True)))
+        select(func.avg(select(func.count(Todo.id)).where(Todo.marked)))
     )
     average_incompleted_todos_per_user = await session.scalar(
-        select(func.avg(select(func.count(Todo.id)).where(Todo.marked == False)))
+        select(func.avg(select(func.count(Todo.id)).where(~Todo.marked)))
     )
 
     stats = DashboardSchema(
@@ -54,6 +60,6 @@ async def get_home_stats(
         average_duration_per_todo=average_duration_formatted,
         average_total_todos_per_user=average_total_todos_per_user,
         average_completed_todos_per_user=average_completed_todos_per_user,
-        average_incompleted_todos_per_user=average_incompleted_todos_per_user
+        average_incompleted_todos_per_user=average_incompleted_todos_per_user,
     )
     return stats

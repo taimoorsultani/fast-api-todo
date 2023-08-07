@@ -5,9 +5,8 @@ from uuid import UUID
 from fastapi_users_db_sqlalchemy import GUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql.functions import func
-from sqlalchemy.sql.schema import ForeignKey, Column
-from sqlalchemy.sql.sqltypes import DateTime
-from sqlalchemy.sql.sqltypes import DateTime, Boolean
+from sqlalchemy.sql.schema import ForeignKey
+from sqlalchemy.sql.sqltypes import Boolean, DateTime
 
 from app.db import Base
 
@@ -31,4 +30,5 @@ class Todo(Base):
     note: Mapped[str | None]
     marked: Mapped[bool] = mapped_column(Boolean, default=False)
     completedAt: Mapped[Optional[datetime] | None] = mapped_column(
-        DateTime(timezone=True), nullable=True)
+        DateTime(timezone=True), nullable=True
+    )

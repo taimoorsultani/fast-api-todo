@@ -1,13 +1,14 @@
 from typing import Any
 
 from fastapi import APIRouter, Depends
-from app.schemas.dashboard import Dashboard as DashboardSchema
+from sqlalchemy import extract, func, select
 from sqlalchemy.ext.asyncio.session import AsyncSession
+
 from app.deps.db import get_async_session
 from app.deps.users import current_user
-from app.models.user import User
-from sqlalchemy import func, select, extract
 from app.models.todo import Todo
+from app.models.user import User
+from app.schemas.dashboard import Dashboard as DashboardSchema
 
 router = APIRouter(prefix="/dashboard")
 
@@ -31,7 +32,7 @@ async def get_user_dashboard_data(
         .where(Todo.completedAt.is_(None))
     )
     average_duration_seconds = await session.scalar(
-        select(func.avg(extract('epoch', Todo.completedAt - Todo.created)))
+        select(func.avg(extract("epoch", Todo.completedAt - Todo.created)))
         .where(Todo.user_id == user.id)
         .where(Todo.completedAt.isnot(None))
     )
@@ -53,6 +54,6 @@ async def get_user_dashboard_data(
         total_todos=total_todos,
         completed_todos=completed_todos,
         incompleted_todos=incompleted_todos,
-        average_duration_per_todo=average_duration_formatted
+        average_duration_per_todo=average_duration_formatted,
     )
     return stats

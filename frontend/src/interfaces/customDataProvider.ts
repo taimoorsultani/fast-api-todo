@@ -1,6 +1,6 @@
-import { DataProvider } from 'react-admin';
+import { DataProvider } from "react-admin";
 
-import { DashboardStats } from './dashboardStats';
+import { DashboardStats } from "./dashboardStats";
 
 export interface CustomDataProvider extends DataProvider {
   stats: (resource: string) => Promise<DashboardStats>;
