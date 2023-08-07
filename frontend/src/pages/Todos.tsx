@@ -11,21 +11,18 @@ import {
   BooleanInput,
 } from 'react-admin';
 
-export const TodoList = (props: any) => {
-  console.log('Todo, Props: ', props);
-  return (
-    <List {...props} filters={[]}>
-      <Datagrid>
-        <TextField source='id' />
-        <TextField source='name' />
-        <TextField source='note' />
-        <BooleanField source='marked' label='Marked' />
-        <TextField source='completedAt' />
-        <EditButton />
-      </Datagrid>
-    </List>
-  );
-};
+export const TodoList = (props: any) => (
+  <List {...props} filters={[]}>
+    <Datagrid>
+      <TextField source='id' />
+      <TextField source='name' />
+      <TextField source='note' />
+      <BooleanField source='marked' label='Marked' />
+      <EditButton />
+    </Datagrid>
+  </List>
+);
+
 export const TodoEdit = (props: any) => (
   <Edit {...props}>
     <SimpleForm>
