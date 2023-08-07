@@ -1,6 +1,6 @@
-import { render, screen, waitFor } from '@testing-library/react';
-import Dashboard from './Dashboard';
-import { AdminContext, testDataProvider } from 'react-admin';
+import { render, screen, waitFor } from "@testing-library/react";
+import Dashboard from "./Dashboard";
+import { AdminContext, testDataProvider } from "react-admin";
 
 const mockDataProvider = testDataProvider({
   stats: (resource: string) => {
@@ -8,12 +8,12 @@ const mockDataProvider = testDataProvider({
       total_todos: 6,
       completed_todos: 4,
       incompleted_todos: 2,
-      average_duration_per_todo: '3 seconds',
+      average_duration_per_todo: "3 seconds",
     });
   },
 });
 
-test('renders dashboard', async () => {
+test("renders dashboard", async () => {
   render(
     <AdminContext dataProvider={mockDataProvider}>
       <Dashboard />
@@ -25,22 +25,22 @@ test('renders dashboard', async () => {
   });
 
   await waitFor(() => {
-    expect(screen.getByText('Total Todos')).toBeInTheDocument();
+    expect(screen.getByText("Total Todos")).toBeInTheDocument();
   });
 
   await waitFor(() => {
-    expect(screen.getByText('Completed Todos')).toBeInTheDocument();
+    expect(screen.getByText("Completed Todos")).toBeInTheDocument();
   });
 
   await waitFor(() => {
-    expect(screen.getByText('InCompleted Todos')).toBeInTheDocument();
+    expect(screen.getByText("InCompleted Todos")).toBeInTheDocument();
   });
 
   await waitFor(() => {
-    expect(screen.getByText('Average Duration per Todo')).toBeInTheDocument();
+    expect(screen.getByText("Average Duration per Todo")).toBeInTheDocument();
   });
 
   await waitFor(() => {
-    expect(screen.getByText('3 seconds')).toBeInTheDocument();
+    expect(screen.getByText("3 seconds")).toBeInTheDocument();
   });
 });

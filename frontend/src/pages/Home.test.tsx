@@ -1,6 +1,6 @@
-import { render, screen, waitFor } from '@testing-library/react';
-import Home from './Home';
-import { AdminContext, testDataProvider } from 'react-admin';
+import { render, screen, waitFor } from "@testing-library/react";
+import Home from "./Home";
+import { AdminContext, testDataProvider } from "react-admin";
 
 const mockDataProvider = testDataProvider({
   stats: (resource: string) => {
@@ -8,7 +8,7 @@ const mockDataProvider = testDataProvider({
       total_todos: 6,
       completed_todos: 4,
       incompleted_todos: 2,
-      average_duration_per_todo: '3 seconds',
+      average_duration_per_todo: "3 seconds",
       average_total_todos_per_user: 5,
       average_completed_todos_per_user: 9,
       average_incompleted_todos_per_user: 10,
@@ -22,12 +22,12 @@ const missingMockDataProvider = testDataProvider({
       total_todos: 6,
       completed_todos: 4,
       incompleted_todos: 2,
-      average_duration_per_todo: '3 seconds',
+      average_duration_per_todo: "3 seconds",
     });
   },
 });
 
-test('renders home, all data received', async () => {
+test("renders home, all data received", async () => {
   render(
     <AdminContext dataProvider={mockDataProvider}>
       <Home />
@@ -35,43 +35,43 @@ test('renders home, all data received', async () => {
   );
 
   await waitFor(() => {
-    expect(screen.getByText('Total Todos')).toBeInTheDocument();
+    expect(screen.getByText("Total Todos")).toBeInTheDocument();
   });
 
   await waitFor(() => {
-    expect(screen.getByText('Completed Todos')).toBeInTheDocument();
+    expect(screen.getByText("Completed Todos")).toBeInTheDocument();
   });
 
   await waitFor(() => {
-    expect(screen.getByText('InCompleted Todos')).toBeInTheDocument();
+    expect(screen.getByText("InCompleted Todos")).toBeInTheDocument();
   });
 
   await waitFor(() => {
-    expect(screen.getByText('Average Duration per Todo')).toBeInTheDocument();
+    expect(screen.getByText("Average Duration per Todo")).toBeInTheDocument();
   });
 
   await waitFor(() => {
-    expect(screen.getByText('3 seconds')).toBeInTheDocument();
+    expect(screen.getByText("3 seconds")).toBeInTheDocument();
   });
 
   await waitFor(() => {
-    expect(screen.getByText('Average Todos per user')).toBeInTheDocument();
+    expect(screen.getByText("Average Todos per user")).toBeInTheDocument();
   });
 
   await waitFor(() => {
     expect(
-      screen.getByText('Average Completed Todos per user')
+      screen.getByText("Average Completed Todos per user")
     ).toBeInTheDocument();
   });
 
   await waitFor(() => {
     expect(
-      screen.getByText('Average InCompleted Todos per user')
+      screen.getByText("Average InCompleted Todos per user")
     ).toBeInTheDocument();
   });
 });
 
-test('renders home, average field not received', async () => {
+test("renders home, average field not received", async () => {
   render(
     <AdminContext dataProvider={missingMockDataProvider}>
       <Home />
@@ -79,40 +79,40 @@ test('renders home, average field not received', async () => {
   );
 
   await waitFor(() => {
-    expect(screen.getByText('Total Todos')).toBeInTheDocument();
+    expect(screen.getByText("Total Todos")).toBeInTheDocument();
   });
 
   await waitFor(() => {
-    expect(screen.getByText('Completed Todos')).toBeInTheDocument();
+    expect(screen.getByText("Completed Todos")).toBeInTheDocument();
   });
 
   await waitFor(() => {
-    expect(screen.getByText('InCompleted Todos')).toBeInTheDocument();
+    expect(screen.getByText("InCompleted Todos")).toBeInTheDocument();
   });
 
   await waitFor(() => {
-    expect(screen.getByText('Average Duration per Todo')).toBeInTheDocument();
+    expect(screen.getByText("Average Duration per Todo")).toBeInTheDocument();
   });
 
   await waitFor(() => {
-    expect(screen.getByText('3 seconds')).toBeInTheDocument();
+    expect(screen.getByText("3 seconds")).toBeInTheDocument();
   });
 
   await waitFor(() => {
     expect(
-      screen.queryByText('Average Todos per user')
+      screen.queryByText("Average Todos per user")
     ).not.toBeInTheDocument();
   });
 
   await waitFor(() => {
     expect(
-      screen.queryByText('Average Completed Todos per user')
+      screen.queryByText("Average Completed Todos per user")
     ).not.toBeInTheDocument();
   });
 
   await waitFor(() => {
     expect(
-      screen.queryByText('Average InCompleted Todos per user')
+      screen.queryByText("Average InCompleted Todos per user")
     ).not.toBeInTheDocument();
   });
 });

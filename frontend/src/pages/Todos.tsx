@@ -9,15 +9,15 @@ import {
   TextInput,
   BooleanField,
   BooleanInput,
-} from 'react-admin';
+} from "react-admin";
 
 export const TodoList = (props: any) => (
   <List {...props} filters={[]}>
     <Datagrid>
-      <TextField source='id' />
-      <TextField source='name' />
-      <TextField source='note' />
-      <BooleanField source='marked' label='Marked' />
+      <TextField source="id" />
+      <TextField source="name" />
+      <TextField source="note" />
+      <BooleanField source="marked" label="Marked" />
       <EditButton />
     </Datagrid>
   </List>
@@ -26,9 +26,9 @@ export const TodoList = (props: any) => (
 export const TodoEdit = (props: any) => (
   <Edit {...props}>
     <SimpleForm>
-      <TextInput source='name' className='fullWidthInput' />
-      <TextInput source='note' multiline className='fullWidthInput' />
-      <BooleanInput source='marked' />
+      <TextInput source="name" className="fullWidthInput" />
+      <TextInput source="note" multiline className="fullWidthInput" />
+      <BooleanInput source="marked" />
     </SimpleForm>
   </Edit>
 );
@@ -36,8 +36,8 @@ export const TodoEdit = (props: any) => (
 export const TodoCreate = (props: any) => (
   <Create {...props}>
     <SimpleForm>
-      <TextInput source='name' className='fullWidthInput' />
-      <TextInput source='note' multiline className='fullWidthInput' />
+      <TextInput source="name" className="fullWidthInput" />
+      <TextInput source="note" multiline className="fullWidthInput" />
     </SimpleForm>
   </Create>
 );

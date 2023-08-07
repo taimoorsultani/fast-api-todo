@@ -1,16 +1,16 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState } from "react";
 
-import { useNotify } from 'react-admin';
-import Button from '@mui/material/Button';
-import Auth from '../components/Auth';
-import { useNavigate } from 'react-router';
-import { authApi } from '../providers/env';
-import { AxiosError } from 'axios';
-import { Link } from 'react-router-dom';
+import { useNotify } from "react-admin";
+import Button from "@mui/material/Button";
+import Auth from "../components/Auth";
+import { useNavigate } from "react-router";
+import { authApi } from "../providers/env";
+import { AxiosError } from "axios";
+import { Link } from "react-router-dom";
 
 const Register = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const notify = useNotify();
   const navigate = useNavigate();
 
@@ -22,18 +22,18 @@ const Register = () => {
         userCreate: formData,
       });
       if (response.data.id) {
-        notify('Successfully registered, you can now log in', {
-          type: 'success',
+        notify("Successfully registered, you can now log in", {
+          type: "success",
         });
-        navigate('/login');
+        navigate("/login");
       }
     } catch (e) {
       const exp = e as AxiosError;
       const errorMsg = exp.response?.data?.detail;
       if (errorMsg) {
-        notify(errorMsg, { type: 'error' });
+        notify(errorMsg, { type: "error" });
       } else {
-        notify('Network error', { type: 'error' });
+        notify("Network error", { type: "error" });
       }
     }
   };
@@ -42,14 +42,14 @@ const Register = () => {
     <Auth
       setEmail={setEmail}
       setPassword={setPassword}
-      actionName='Register'
+      actionName="Register"
       submit={submit}
       extraActions={
         <>
-          <Button color='secondary' to={'/login'} component={Link}>
+          <Button color="secondary" to={"/login"} component={Link}>
             Sign in
           </Button>
-          <Button color='secondary' to={'/home'} component={Link}>
+          <Button color="secondary" to={"/home"} component={Link}>
             Home
           </Button>
         </>
