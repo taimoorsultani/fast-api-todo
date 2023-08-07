@@ -49,7 +49,7 @@ const Register = () => {
           <Button color='secondary' to={'/login'} component={Link}>
             Sign in
           </Button>
-          <Button color='secondary' to={'/'} component={Link}>
+          <Button color='secondary' to={'/home'} component={Link}>
             Home
           </Button>
         </>

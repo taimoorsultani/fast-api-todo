@@ -14,10 +14,23 @@
 
 
 
-export * from './api/auth-api';
-export * from './api/dashboard-api';
-export * from './api/home-api';
-export * from './api/items-api';
-export * from './api/todos-api';
-export * from './api/users-api';
+/**
+ * 
+ * @export
+ * @interface TodoCreate
+ */
+export interface TodoCreate {
+    /**
+     * 
+     * @type {string}
+     * @memberof TodoCreate
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TodoCreate
+     */
+    'note': string;
+}
 

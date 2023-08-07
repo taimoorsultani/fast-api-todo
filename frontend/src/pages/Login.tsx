@@ -35,7 +35,7 @@ const Login = () => {
           <Button color='secondary' to={'/register'} component={Link}>
             Register
           </Button>
-          <Button color='secondary' to={'/'} component={Link}>
+          <Button color='secondary' to={'/home'} component={Link}>
             Home
           </Button>
         </>

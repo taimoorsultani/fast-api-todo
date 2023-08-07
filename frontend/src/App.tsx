@@ -13,7 +13,7 @@ import authProvider from './providers/authProvider';
 import PostIcon from '@mui/icons-material/PostAdd';
 import PersonIcon from '@mui/icons-material/Person';
 import { dataProvider } from './providers/dataProvider';
-// import Home from './pages/Home';
+import Home from './pages/Home';
 
 import './App.css';
 
@@ -34,9 +34,9 @@ const App = () => {
       <CustomRoutes noLayout>
         <Route path='/register' element={<Register />} />
       </CustomRoutes>
-      {/* <CustomRoutes>
-        <Route path='/' element={<Home />} />
-      </CustomRoutes> */}
+      <CustomRoutes noLayout>
+        <Route path='/home' element={<Home />} />
+      </CustomRoutes>
       {(permissions) => [
         permissions.is_superuser === true ? (
           <Resource

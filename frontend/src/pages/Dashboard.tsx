@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import CardHeader from '@mui/material/CardHeader';
 import Card from '@mui/material/Card';
 import { useDataProvider } from 'react-admin';
@@ -6,7 +6,7 @@ import { useDataProvider } from 'react-admin';
 import { CustomDataProvider, DashboardStats } from '../interfaces';
 import Stats from '../components/Stats';
 
-const Component = () => {
+const Component: React.FC = () => {
   const dataProvider = useDataProvider<CustomDataProvider>();
 
   const [data, setData] = useState<DashboardStats>({
